@@ -26,6 +26,7 @@ def main():
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) 
     updatable.add(player)
     drawable.add(player)
+    
 
 
 
@@ -45,10 +46,13 @@ def main():
             if player.collision_check(asteroid):
                 print("Game over!")
                 exit()
-            else:
-                continue
                 
-
+        for shot in shots:
+            for asteroid in asteroids:
+                if shot.collision_check(asteroid):
+                    shot.kill()
+                    asteroid.kill() 
+                
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 
